@@ -19,5 +19,10 @@ from book import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^register', views.register),
+    url(r'^login', views.user_login, name='login'),
+    url(r'^restricted/', views.restricted, name='restricted'),
+    url(r'^logout/$', views.user_logout, name='logout'),
+    url(r'^user_page/$', views.user_page, name='user_page'),
     url(r'^$', views.index),
 ]
