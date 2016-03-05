@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from book.models import Subscription, SubscriptionType
 
 
 # Create your views here.
@@ -14,6 +15,18 @@ def index(request):
 def user_page(request):
 	context_dict = {}
 	return render(request, 'book/user.html', context_dict)
+
+def get_shipment(request):
+	context_dict = {}
+	return render(request, 'book/get_shipment.html', context_dict)
+
+def pay(request):
+	context_dict = {}
+	if request.method == 'POST':
+		level = SubscriptionType.objects.get(pk=4)
+		subscription = Subscription(user = request.user, available_shipments = 1, level = level)
+		subscription.save()
+	return render(request, 'book/get_shipment.html', context_dict)
 
 def register(request):
 
