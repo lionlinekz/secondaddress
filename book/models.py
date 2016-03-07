@@ -20,6 +20,7 @@ class Subscription(models.Model):
     user = models.ForeignKey(User)
     level = models.ForeignKey(SubscriptionType)
     available_shipments = models.IntegerField(default=0)
+    extra_shipments = models.IntegerField(default = 0)
 
     def __unicode__(self):
         return self.user.username

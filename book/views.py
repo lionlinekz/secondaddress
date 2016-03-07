@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from book.models import Subscription, SubscriptionType
+from book.models import Subscription, SubscriptionType, PersonEmpowered
 
 
 # Create your views here.
@@ -12,21 +12,70 @@ def index(request):
 	context_dict = {}
 	return render(request, 'book/home.html', context_dict)
 
+@login_required
 def user_page(request):
 	context_dict = {}
+        subscription = Subscription.objects.get(user = request.user)
+        context_dict['shipments'] = subscription.available_shipments + subscription.extra_shipments
+        if subscription.level.name != "Simple":
+            context_dict['subscription'] = subscription
+        context_dict['persons'] = PersonEmpowered.objects.filter(subscription = subscription)
 	return render(request, 'book/user.html', context_dict)
 
+@login_required
 def get_shipment(request):
 	context_dict = {}
 	return render(request, 'book/get_shipment.html', context_dict)
 
+@login_required
+def confirmation(request):
+    context_dict = {}
+    return render(request, 'book/confirmation.html', context_dict)
+
+@login_required
+def subscribe_pay(request):
+    context_dict = {}
+    if request.method == 'POST':
+        context_dict['level'] = request.POST.get('level')
+    return render(request, 'book/subscribe_pay.html', context_dict)
+
+@login_required
+def subscribe(request):
+    context_dict = {}
+    if request.method == 'POST':
+        level = request.POST.get('level')
+        subscription_type = SubscriptionType.objects.get(name = level)
+        subscription = Subscription.objects.get(user = request.user)
+        subscription.level = subscription_type
+        subscription.available_shipments = subscription_type.amount_of_shipments
+        subscription.save()
+    return HttpResponseRedirect('/user_page')
+
+@login_required
+def add_person(request):
+    context_dict = {}
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        surname = request.POST.get('surname')
+        phone = request.POST.get('phone')
+        subscription = Subscription.objects.get(user = request.user)
+        person = PersonEmpowered(name = name, surname = surname, phone = phone, subscription = subscription)
+        person.save()
+    return HttpResponseRedirect('/user_page')
+
+@login_required
 def pay(request):
 	context_dict = {}
 	if request.method == 'POST':
 		level = SubscriptionType.objects.get(pk=4)
-		subscription = Subscription(user = request.user, available_shipments = 1, level = level)
-		subscription.save()
-	return render(request, 'book/get_shipment.html', context_dict)
+        subscription = Subscription.objects.get(user = request.user)
+        if subscription:
+            subscription.extra_shipments += 1
+            subscription.save()
+        else:
+    		subscription = Subscription(user = request.user, available_shipments = 0, extra_shipments = 1, level = level)
+    		subscription.save()
+	return render(request, 'book/confirmation.html', context_dict)
 
 def register(request):
 

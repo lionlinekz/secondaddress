@@ -9,9 +9,8 @@
     <meta name="author" content="">
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-    <title>Second Address</title>
+    <title>Off Canvas Template for Bootstrap</title>
     {% load staticfiles %}
-
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -46,60 +45,17 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="home.html">Home</a></li>
-            <li><a href="history.html">History</a></li>
-            <li><a href="blogs.html">Blogs</a></li>
-          </ul>          
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
+            <li class="active"><a href="#">User page</a></li>
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->
     </nav><!-- /.navbar -->
 
     <div class="container">
-
-      <div class="row row-offcanvas row-offcanvas-right">
-
-        <div class="col-xs-12 col-sm-12">
-          <p class="pull-right visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-          </p>
-
-          <div class="jumbotron">
-            <h1>Collect your parcel 7 days a week</h1>
-            <p> First collection is free for subscribers!</p>
-            <p><a class="btn btn-warning btn-lg" href="/get_shipment">Get your $5</a></p>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-12 col-lg-12">
-              <h2>Single time use</h2>
-              <p>One time usage is as low as $5! Simply choose the nearest shop available and pay as you like!         
-              <a class="btn btn-primary pull-right" href="/get_shipment" role="button">Get your second address »</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-          </div><!--/row-->
-        </div><!--/.col-xs-12.col-sm-9-->
-
-        
-      </div><!--/row-->
-
-      <hr>
-      <div class="row row-offcanvas row-offcanvas-right">
-        <section id="pricing" class="section">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="headline">
-                  <h2>Subscription</h2>
-                  <p>You will never worry about postage again!</p>
-                </div>
-              </div>
-            </div>  
-            <div class="row">
-              <div class="col-md-4 col-sm-4">
-                <div class="panel price-plan">
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          {% if level == "Silver" %}
+            <div class="panel price-plan">
                   <div class="panel-heading">
                     <h4>Silver Package</h4><!-- Package Title -->
                   </div>
@@ -114,17 +70,9 @@
                     <li class="list-group-item">1 persons empowered</li>
                     <li class="list-group-item"> + 1.49 € for extra storage</li>
                   </ul><!-- End Package Features -->
-                  <div class="panel-footer text-center">
-                                  <form class="form-inline" action="/subscribe_pay/" method="post">
-                         {% csrf_token %}
-                         <input type="hidden" name="level" value="Silver">
-                        <button type="submit" class="btn btn-warning">Get subscription</button>
-                      </form>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-4">
-                <div class="panel price-plan popular">
+            </div>
+          {% elif level == "Gold" %}
+            <div class="panel price-plan popular">
                   <div class="panel-heading">
                     <h4>Gold Package</h4><!-- Package Title -->
                   </div>
@@ -139,16 +87,9 @@
                     <li class="list-group-item">2 persons empowered</li>
                     <li class="list-group-item"> + 1.89 € for extra storage</li>
                   </ul>
-                  <div class="panel-footer text-center">
-<form class="form-inline" action="/subscribe_pay/" method="post">
-                         {% csrf_token %}
-                         <input type="hidden" name="level" value="Gold">
-                        <button type="submit" class="btn btn-warning">Get subscription</button>
-                      </form>                  </div>
                 </div>
-              </div>
-              <div class="col-md-4 col-sm-4">
-                <div class="panel price-plan">
+            {% elif level == "Platinum" %}
+              <div class="panel price-plan">
                   <div class="panel-heading">
                     <h4>Platinum Package</h4><!-- Package Title -->
                   </div>
@@ -163,25 +104,50 @@
                     <li class="list-group-item">3 persons empowered</li>
                     <li class="list-group-item">free storage</li>
                   </ul>
-                  <div class="panel-footer text-center">
-<form class="form-inline" action="/subscribe_pay/" method="post">
-                         {% csrf_token %}
-                         <input type="hidden" name="level" value="Platinum">
-                        <button type="submit" class="btn btn-warning">Get subscription</button>
-                      </form>                  </div>
                 </div>
-              </div>
-            </div>  
-          </div>
-        </section>
-      </div>
-      <hr>
-                      <div class="headline">
-                  <h2>List of shops</h2>
-                  <p>Open 7 days a week</p>
+          {% endif %}
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <br><br><br><br><br>
+             <form class="form-horizontal" action="/subscribe" method="post">
+               {% csrf_token %}
+              <fieldset>
+                <legend>Buying {{ level }} package</legend>
+                <div class="form-group">
+                  <label for="inputEmail" class="col-lg-2 control-label">Card number</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX">
+                  </div>
                 </div>
+                <div class="form-group">
+                  <label for="inputEmail" class="col-lg-2 control-label">Expiry Period</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" placeholder="MM/YY">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail" class="col-lg-2 control-label">CVC code</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" >
+                  </div>
+                </div>
+                                    <input type="hidden" class="form-control"  name="level" value="{{ level }}">
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d160182.99507886384!2d71.4793897!3d51.1479457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2skz!4v1456914781012" width="1200" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+        </div>
+
+
+      </div>
+
+ 
+
   <!-- End Pricing -->
 
       <footer>

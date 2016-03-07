@@ -25,6 +25,10 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^user_page/$', views.user_page, name='user_page'),
     url(r'^get_shipment/$', views.get_shipment, name='get_shipment'),
+    url(r'^confirmation/$', views.confirmation),
+    url(r'^subscribe_pay/$', views.subscribe_pay),
+    url(r'^subscribe', views.subscribe),
+    url(r'^add_person', views.add_person),
     url(r'^pay', views.pay),
     url(r'^$', views.index),
 ]
