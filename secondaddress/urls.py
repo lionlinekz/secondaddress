@@ -29,6 +29,9 @@ urlpatterns = [
     url(r'^subscribe_pay/$', views.subscribe_pay),
     url(r'^subscribe', views.subscribe),
     url(r'^add_person', views.add_person),
+    url(r'^history', views.history),
+    url(r'^blogs', views.blogs),
+    url(r'^prices', views.prices),
     url(r'^pay', views.pay),
     url(r'^$', views.index),
 ]

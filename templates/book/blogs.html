@@ -9,20 +9,21 @@
     <meta name="author" content="">
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-    <title>Off Canvas Template for Bootstrap</title>
+    <title>Second Address</title>
+    {% load staticfiles %}
 
     <!-- Bootstrap core CSS -->
-    <link href="./secadress_files/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="./secadress_files/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="./secadress_files/offcanvas.css" rel="stylesheet">
+    <link href="{% static 'css/offcanvas.css' %}" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="./secadress_files/ie-emulation-modes-warning.js"></script>
+    <script src="{% static 'js/ie-emulation-modes-warning.js' %}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,13 +42,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="http://getbootstrap.com/examples/offcanvas/#">Project name</a>
+          <a class="navbar-brand" href="/">SecondAddress</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="history.html">History</a></li>
-            <li class="active"><a href="blogs.html">Blogs</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/history/">History</a></li>
+            <li class="active"><a href="/blogs/">Blogs</a></li>
+            <li><a href="/prices/">Prices</a></li>
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->

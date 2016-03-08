@@ -46,54 +46,17 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/history/">History</a></li>
             <li><a href="/blogs/">Blogs</a></li>
-            <li><a href="/prices/">Prices</a></li>
-          </ul>          
-          <ul class="nav navbar-nav navbar-right">
-            {% if username %}
-            <li><a href="/user_page/">My account</a></li>
-            <li><a href="/logout/">Logged in as {{ username }}. Log out</a></li>
-            {% else %}
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
-            {% endif %}
-            
+            <li class="active"><a href="/prices/">Prices</a></li>
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->
     </nav><!-- /.navbar -->
 
     <div class="container">
-
-      <div class="row row-offcanvas row-offcanvas-right">
-
-        <div class="col-xs-12 col-sm-12">
-          <p class="pull-right visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-          </p>
-
-          <div class="jumbotron">
-            <h1>Collect your parcel 7 days a week</h1>
-            <p> First collection is free for subscribers!</p>
-            <p><a class="btn btn-warning btn-lg" href="/get_shipment">Get your $5</a></p>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-12 col-lg-12">
-              <h2>Single time use</h2>
-              <p>One time usage is as low as $5! Simply choose the nearest shop available and pay as you like!         
-              <a class="btn btn-primary pull-right" href="/get_shipment" role="button">Get your second address »</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-          </div><!--/row-->
-        </div><!--/.col-xs-12.col-sm-9-->
-
-        
-      </div><!--/row-->
-
-      <hr>
-      <div class="row row-offcanvas row-offcanvas-right">
+                <<div class="row row-offcanvas row-offcanvas-right">
         <section id="pricing" class="section">
           <div class="container">
             <div class="row">
@@ -182,13 +145,8 @@
           </div>
         </section>
       </div>
-      <hr>
-                      <div class="headline">
-                  <h2>List of shops</h2>
-                  <p>Open 7 days a week</p>
-                </div>
+ 
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d160182.99507886384!2d71.4793897!3d51.1479457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2skz!4v1456914781012" width="1200" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
   <!-- End Pricing -->
 
       <footer>

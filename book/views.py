@@ -10,7 +10,21 @@ from book.models import Subscription, SubscriptionType, PersonEmpowered
 # Create your views here.
 def index(request):
 	context_dict = {}
+        if request.user:
+            context_dict['username'] = request.user.username
 	return render(request, 'book/home.html', context_dict)
+
+def history(request):
+    context_dict = {}
+    return render(request, 'book/history.html', context_dict)
+
+def blogs(request):
+    context_dict = {}
+    return render(request, 'book/blogs.html', context_dict)
+
+def prices(request):
+    context_dict = {}
+    return render(request, 'book/prices.html', context_dict)
 
 @login_required
 def user_page(request):

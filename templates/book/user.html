@@ -41,11 +41,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="/">Project name</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">User page</a></li>
+            <li class="active"><a href="/user_page/">User page</a></li>
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->
@@ -88,8 +88,9 @@
           <hr>
           <h2> Persons Empowered </h2>
           {% for person in persons %}
-          {{ person.name }} {{ person.surname }} {{ person.phone }}
+          <h3>{{ person.name }} {{ person.surname }} {{ person.phone }}</h3>
           {% endfor %}
+          <br>
           <form class="form-inline" action="/add_person/" method="post">
                  {% csrf_token %}
                 <div class="form-group">
