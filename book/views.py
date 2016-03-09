@@ -50,7 +50,14 @@ def confirmation(request):
 def subscribe_pay(request):
     context_dict = {}
     if request.method == 'POST':
-        context_dict['level'] = request.POST.get('level')
+        level = request.POST.get('level')
+        saver = request.POST.get('saver')
+        subscription_type = SubscriptionType.objects.get(name = level)
+        cost = subscription_type.monthly_fee
+        if saver:
+        	cost += subscription_type.store_shipment_fee
+        context_dict['cost'] = cost
+        context_dict['level'] = level
     return render(request, 'book/subscribe_pay.html', context_dict)
 
 @login_required

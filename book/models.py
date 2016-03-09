@@ -7,6 +7,7 @@ from datetime import datetime
 class SubscriptionType(models.Model):
 	name = models.CharField(max_length=128)
 	days = models.IntegerField(default = 0)
+	monthly_fee = models.FloatField(default = 0)
 	notification = models.BooleanField(default=False)
 	amount_of_addresses = models.IntegerField(default = 0)
 	amount_of_shipments = models.IntegerField(default = 0)

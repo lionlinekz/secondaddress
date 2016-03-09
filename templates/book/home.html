@@ -113,21 +113,23 @@
                   <div class="panel-body">
                     <h3>€4<sup>.89</sup> <span>/ month</span></h3><!-- Price -->
                   </div>
+                   <form class="form-inline" action="/subscribe_pay/" method="post">
+                         {% csrf_token %}
                   <ul class="list-group"><!-- Package Features -->
                     <li class="list-group-item">7 days week</li>
                     <li class="list-group-item">Notification of receipt</li>
                     <li class="list-group-item">1 address</li>
                     <li class="list-group-item">3 shipments</li>
                     <li class="list-group-item">1 persons empowered</li>
-                    <li class="list-group-item"> + 1.49 € for extra storage</li>
+                    <li class="list-group-item"><input type="checkbox" name="saver"> + 1.49 € for extra storage</li>
                   </ul><!-- End Package Features -->
                   <div class="panel-footer text-center">
-                                  <form class="form-inline" action="/subscribe_pay/" method="post">
-                         {% csrf_token %}
+                                 
                          <input type="hidden" name="level" value="Silver">
                         <button type="submit" class="btn btn-warning">Get subscription</button>
-                      </form>
+                      
                   </div>
+                  </form>
                 </div>
               </div>
               <div class="col-md-4 col-sm-4">
@@ -138,20 +140,21 @@
                   <div class="panel-body">
                     <h3>€6<sup>.79</sup> <span>/ month</span></h3><!-- Price -->
                   </div>
+                  <form class="form-inline" action="/subscribe_pay/" method="post">
+                         {% csrf_token %}
                   <ul class="list-group">
                     <li class="list-group-item">7 days week</li>
                     <li class="list-group-item">Notification of receipt</li>
                     <li class="list-group-item">2 addresses</li>
                     <li class="list-group-item">6 shipments</li>
                     <li class="list-group-item">2 persons empowered</li>
-                    <li class="list-group-item"> + 1.89 € for extra storage</li>
+                    <li class="list-group-item"><input type="checkbox" name="saver"> + 1.89 € for extra storage</li>
                   </ul>
                   <div class="panel-footer text-center">
-<form class="form-inline" action="/subscribe_pay/" method="post">
-                         {% csrf_token %}
+
                          <input type="hidden" name="level" value="Gold">
                         <button type="submit" class="btn btn-warning">Get subscription</button>
-                      </form>                  </div>
+                                       </div></form> 
                 </div>
               </div>
               <div class="col-md-4 col-sm-4">
@@ -162,6 +165,8 @@
                   <div class="panel-body">
                     <h3>€9<sup>.81</sup> <span>/ month</span></h3><!-- Price -->
                   </div>
+                  <form class="form-inline" action="/subscribe_pay/" method="post">
+                         {% csrf_token %}
                   <ul class="list-group">
                     <li class="list-group-item">7 days week</li>
                     <li class="list-group-item">Notification of receipt</li>
@@ -171,12 +176,12 @@
                     <li class="list-group-item">free storage</li>
                   </ul>
                   <div class="panel-footer text-center">
-<form class="form-inline" action="/subscribe_pay/" method="post">
-                         {% csrf_token %}
+
                          <input type="hidden" name="level" value="Platinum">
                         <button type="submit" class="btn btn-warning">Get subscription</button>
-                      </form>                  </div>
+                                       </div>
                 </div>
+                </form> 
               </div>
             </div>  
           </div>
