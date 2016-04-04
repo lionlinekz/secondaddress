@@ -12,7 +12,7 @@ def index(request):
 	context_dict = {}
         if request.user:
             context_dict['username'] = request.user.username
-	return render(request, 'book/home.html', context_dict)
+	return render(request, 'app/index.html', context_dict)
 
 def history(request):
     context_dict = {}

@@ -1,0 +1,12 @@
+
+@font-face {
+    font-family: SourceSansPro;
+    src: url('source-sans-pro/SourceSansPro-Light.otf');
+    font-weight: 100;
+}
+@font-face {
+    font-family: SourceSansPro;
+    src: url('source-sans-pro/SourceSansPro-LightItalic.otf');
+    font-style: italic;
+    font-weight: 300;
+}
