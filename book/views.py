@@ -134,7 +134,7 @@ def register(request):
         user_form = UserForm()
     # Render the template depending on the context.
     return render(request,
-            'book/register.html',
+            'app/register.html',
             {'user_form': user_form, 'registered': registered} )
 
 
@@ -177,7 +177,7 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render(request, 'book/login.html', {})
+        return render(request, 'app/login.html', {})
 
 @login_required
 def restricted(request):
