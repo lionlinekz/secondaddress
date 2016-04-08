@@ -36,6 +36,25 @@
 <script src="/html/kybook/assets/js/respond.min.js"></script>
 <![endif]-->
 <meta name="robots" content="none"></head>
+<script>
+	$("#first").change(function() {
+	    if(this.checked) {
+	    	$("#firstprice").text("€6.38");
+	        //Do stuff
+	    }else{
+	    	$("#firstprice").text("€4.89");
+	    }
+	});
+	$("#second").change(function() {
+	    if(this.checked) {
+	    	$("#secondprice").text("€8.68");
+	        //Do stuff
+	    }else{
+	    	$("#secondprice").text("€6.79");
+	    }
+	});
+</script>
+
 <body>
 
 
@@ -549,7 +568,6 @@ O È GRATIS</div>
 <!-- JavaScripts placed at the end of the document so the pages load faster -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-
 		<script type="text/javascript" src="{% static 'app/js/jquery.parallax.js' %}"></script>
 		<script type="text/javascript" src="{% static 'app/js/touch.js' %}"></script>
 		<script type="text/javascript" src="{% static 'app/js/modernizr.js' %}"></script>
@@ -591,22 +609,5 @@ O È GRATIS</div>
         $(id).addClass("activeStepInfo");
     }
 </script>
-<script>
-$("#first").change(function() {
-    if(this.checked) {
-    	$("#firstprice").text("€6.38");
-        //Do stuff
-    }else{
-    	$("#firstprice").text("€4.89");
-    }
-});
-$("#second").change(function() {
-    if(this.checked) {
-    	$("#secondprice").text("€8.68");
-        //Do stuff
-    }else{
-    	$("#secondprice").text("€6.79");
-    }
-});
-</script>
+
 </body></html>

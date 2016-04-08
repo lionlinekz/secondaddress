@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from book.forms import UserForm
+from book.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from book.models import Subscription, SubscriptionType, PersonEmpowered
+from book.models import Subscription, SubscriptionType, PersonEmpowered, UserProfile
 
 
 # Create your views here.
@@ -72,6 +72,11 @@ def subscribe(request):
         subscription.save()
     return HttpResponseRedirect('/user_page')
 
+def registration_subscription(request):
+
+
+    return render(request, 'book/confirmation.html', context_dict)
+
 @login_required
 def add_person(request):
     context_dict = {}
@@ -109,6 +114,7 @@ def register(request):
         # Attempt to grab information from the raw form information.
         # Note that we make use of both UserForm and UserProfileForm.
         user_form = UserForm(data=request.POST)
+        user_profile_form = UserForm(data=request.POST)
 
         # If the two forms are valid...
         if user_form.is_valid():
@@ -119,12 +125,12 @@ def register(request):
             # Once hashed, we can update the user object.
             user.set_password(user.password)
             user.save()
-            # Update our variable to tell the template registration was successful.
+            user_profile = UserProfile()
+            user_profile.user = user
+            user_profile.phone = request.POST.get('phone')
+            user_profile.save()
             registered = True
-
-        # Invalid form or forms - mistakes or something else?
-        # Print problems to the terminal.
-        # They'll also be shown to the user.
+            return render(request, 'app/package.html', {'user': user})
         else:
             print user_form.errors
 
@@ -132,10 +138,11 @@ def register(request):
     # These forms will be blank, ready for user input.
     else:
         user_form = UserForm()
+        user_profile_form = UserProfileForm()
     # Render the template depending on the context.
     return render(request,
             'app/register.html',
-            {'user_form': user_form, 'registered': registered} )
+            {'user_form': user_form, 'user_profile_form': user_profile_form, 'registered': registered} )
 
 
 def user_login(request):

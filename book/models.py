@@ -22,6 +22,10 @@ class Subscription(models.Model):
     level = models.ForeignKey(SubscriptionType)
     available_shipments = models.IntegerField(default=0)
     extra_shipments = models.IntegerField(default = 0)
+    first_addressee_name = models.CharField(max_length=128, default="")
+    second_addressee_name = models.CharField(max_length=128, default="")
+    first_addressee_phone = models.CharField(max_length=64, default="")
+    second_addressee_phone = models.CharField(max_length=64, default="")
 
     def __unicode__(self):
         return self.user.username
@@ -63,3 +67,10 @@ class Shopkeeper(models.Model):
 
 	def __unicode__(self):
 		return self.user.name
+
+class UserProfile(models.Model):  
+    user = models.OneToOneField(User)
+    phone = models.CharField(max_length=128)
+
+    def __str__(self):  
+          return "%s's profile" % self.user 
