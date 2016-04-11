@@ -203,7 +203,7 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return HttpResponseRedirect('/user_page')
+                return HttpResponseRedirect('/account')
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your Rango account is disabled.")
