@@ -4,69 +4,84 @@
 
 
 {% block body_block %}
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 form-box">
-            <div class="form-top">
-                <div class="form-top-left">
-                    <h3>Monthly Payment</h3>
-                    <p>The price excludes the ITA tax</p>
-                </div>
-                <div class="form-top-right">
-                    €10
-                </div>
-            </div>
-            <div class="form-bottom">
-                <form role="form" action="" method="post" class="login-form" id="myForm">
                     <div class="row">
-                        <div class="col-sm-8">
-                            <label class="radio-inline">
-                              <input type="radio" name="inlineRadioOptions" id="silver_button" value="option1"> Silver Package
-                            </label>
-                            <label class="radio-inline">
-                              <input type="radio" name="inlineRadioOptions" id="gold_button" value="option2"> Gold Package
-                            </label>
-                            <label class="radio-inline">
-                              <input type="radio" name="inlineRadioOptions" id="platinum_button" value="option3"> Platinum Package
-                            </label>
-                            <div class="row">
-                                <br>
-                                <div class="col-sm-7">
-                                    <div class="form-group"  id="goldname">
-                                        <label class="sr-only" for="form-username">Name</label>
-                                        <input type="text" name="form-username" placeholder="Name..." class="form-username form-control" >
-                                    </div>
-                                    <div class="form-group"  id="platinumname">
-                                        <label class="sr-only" for="form-username">Name</label>
-                                        <input type="text" name="form-username" placeholder="Name..." class="form-username form-control" id="form-username">
-                                    </div>
+                        <div class="col-sm-8 col-sm-offset-2 form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Monthly Payment</h3>
+                                    <p>The price excludes the ITA tax</p>
                                 </div>
-                                <div class="col-sm-5">
-                                    <div class="form-group" id="goldnumber">
-                                        <label class="sr-only" for="form-username">Name</label>
-                                        <input type="text" name="form-username" placeholder="Name..." class="form-username form-control" id="form-username">
-                                    </div>
-                                    <div class="form-group"  id="platinumnumber">
-                                        <label class="sr-only" for="form-username">Name</label>
-                                        <input type="text" name="form-username" placeholder="Name..." class="form-username form-control" id="form-username">
-                                    </div>
+                                <div class="form-top-right" id="firstprice">
+                                    €10
                                 </div>
-                                <br>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                        ✓ 7 days week <br>✓ Notification of receipt<br>✓ 1 address<br>✓ 3 shipments<br>✓ 1 persons empowered <br> 
+                            <div class="form-bottom">
+                                <form role="form" action="" method="post" class="login-form" id="myForm">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <label class="radio-inline">
+                                              <input type="radio" name="plan" id="silver_button" value="Silver"> Silver Package
+                                            </label>
+                                            <label class="radio-inline">
+                                              <input type="radio" name="plan" id="gold_button" value="Gold"> Gold Package
+                                            </label>
+                                            <label class="radio-inline">
+                                              <input type="radio" name="plan" id="platinum_button" value="Platinum"  checked="checked"> Platinum Package
+                                            </label>
+                                            {{ subcscription_form.level_choices.0 }}
+
+
+                                            <div class="row">
+                                                <br>
+                                                <div class="col-sm-7">
+                                                    <div class="form-group"  id="goldname">
+                                                        <input type="text" name="firstname" placeholder="first addressee name" class="form-username form-control" >
+                                                    </div>
+                                                    <div class="form-group"  id="platinumname">
+                                                        <input type="text" name="secondname" placeholder="second addressee name" class="form-username form-control" id="form-username">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <div class="form-group" id="goldnumber">
+                                                        <input type="text" name="firstphone" placeholder="phone number" class="form-username form-control" id="form-username">
+                                                    </div>
+                                                    <div class="form-group"  id="platinumnumber">
+                                                        <label class="sr-only" for="form-username">Name</label>
+                                                        <input type="text" name="secondphone" placeholder="phone number" class="form-username form-control" id="form-username">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4" id="silverinfo">
+                                        ✓ 7 days week <br>✓ Notification of receipt<br>✓ 1 address<br>✓ 3 shipments<br>✓ 1 person empowered <br> 
+                                        </div>
+                                        <div class="col-sm-4" id="goldinfo">
+                                        ✓ 7 days week <br>✓ Notification of receipt<br>✓ 2 addresses<br>✓ 6 shipments<br>✓ 2 people empowered <br> 
+                                        </div>
+                                        <div class="col-sm-4" id="platinuminfo">
+                                        ✓ 7 days week <br>✓ Notification of receipt<br>✓ 3 addresses<br>✓ unlimited shipments<br>✓ 3 people empowered <br> 
+                                        </div>
+                                    </div>
+                                            <div class="checkbox" id="keepcheck">
+                                              <label>
+
+                                                <input type="checkbox" name="saver" id="first">
+                                                + €1.49 to keep unused shipments
+                                              </label>
+                                            </div>
+                                            <div class="checkbox" id="goldcheck">
+                                              <label>
+                                                <input type="checkbox" name="saver" id="second">
+                                                + €1.89 to keep unused shipments
+                                              </label>
+                                            </div>
+                                    <button type="submit" class="btn">Sign up!</button>
+                                    <br> No, thanks
+                                </form>
+                            </div>
                         </div>
                     </div>
-                            <div class="checkbox">
-                              <label>
-                                <input type="checkbox" value="">
-                                Option one is this and that&mdash;be sure to include why it's great
-                              </label>
-                            </div>
-                    <button type="submit" class="btn">Sign up!</button>
-                </form>
-            </div>
-        </div>
-    </div>
      <script src="{% static 'app/js/package.js' %}"></script>
 {% endblock %}

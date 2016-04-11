@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from book.forms import UserForm, UserProfileForm
+from book.forms import UserForm, UserProfileForm, SubscriptionForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -73,8 +73,23 @@ def subscribe(request):
     return HttpResponseRedirect('/user_page')
 
 def registration_subscription(request):
-
-
+    context_dict = {}
+    if request.method == 'POST':
+        selected_plan = p.choice_set.get(pk=request.POST['plan'])
+        subscription_type = SubscriptionType.objects.get(name = selected_plan)
+        subscription = Subscription.objects.get(user = request.user)
+        subscription.level = subscription_type
+        subscription.available_shipments = subscription_type.amount_of_shipments
+        subscription.saver = request.POST.get('saver')
+        subscription.save()
+        if selected_plan == "Gold":
+            subscription.first_addressee_name = request.POST.get('firstname')
+            subscription.first_addressee_phone = request.POST.get('firstphone')
+        elif selected_plan == "Platinum":
+            subscription.first_addressee_name = request.POST.get('firstname')
+            subscription.first_addressee_phone = request.POST.get('firstphone')
+            subscription.second_addressee_name = request.POST.get('secondname')
+            subscription.second_addressee_phone = request.POST.get('secondphone')
     return render(request, 'book/confirmation.html', context_dict)
 
 @login_required
@@ -114,7 +129,7 @@ def register(request):
         # Attempt to grab information from the raw form information.
         # Note that we make use of both UserForm and UserProfileForm.
         user_form = UserForm(data=request.POST)
-        user_profile_form = UserForm(data=request.POST)
+        user_profile_form = UserProfileForm(data=request.POST)
 
         # If the two forms are valid...
         if user_form.is_valid():

@@ -25,8 +25,7 @@ class SubscriptionForm(forms.ModelForm):
 			 ('Gold','Gold Package'),
 			 ('Platinum','Platinum Package')]
 	level = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())
-	phone = forms.CharField(widget=forms.TextInput(attrs={'class':'form-username form-control', 'placeholder':'Phone'}))
 
 	class Meta:
-		model = UserProfile
-		fields = ('phone',)
+		model = Subscription
+		fields = ('level',)

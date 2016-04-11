@@ -26,6 +26,7 @@ class Subscription(models.Model):
     second_addressee_name = models.CharField(max_length=128, default="")
     first_addressee_phone = models.CharField(max_length=64, default="")
     second_addressee_phone = models.CharField(max_length=64, default="")
+    saver = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.user.username
