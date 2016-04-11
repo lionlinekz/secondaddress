@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class SubscriptionType(models.Model):
@@ -27,6 +27,7 @@ class Subscription(models.Model):
     first_addressee_phone = models.CharField(max_length=64, default="")
     second_addressee_phone = models.CharField(max_length=64, default="")
     saver = models.BooleanField(default=False)
+    renew_date = models.DateTimeField(default=datetime.now())
 
     def __unicode__(self):
         return self.user.username
@@ -75,3 +76,10 @@ class UserProfile(models.Model):
 
     def __str__(self):  
           return "%s's profile" % self.user 
+
+class Addresses(models.Model):
+	subscription = models.ForeignKey(Subscription)
+	shopkeeper = models.ForeignKey(Shopkeeper)
+
+	def __unicode__(self):
+		return shopkeeper.shop_name

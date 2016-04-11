@@ -5,7 +5,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from book.models import Subscription, SubscriptionType, PersonEmpowered, UserProfile
-
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 # Create your views here.
 def index(request):
@@ -72,25 +73,40 @@ def subscribe(request):
         subscription.save()
     return HttpResponseRedirect('/user_page')
 
+def account(request):
+	context_dict = {}
+	subscription = Subscription.objects.get(user = request.user)
+	context_dict['subscription'] = subscription
+	if subscription.level.name == "Platinum":
+		context_dict['platinum'] = True
+	context_dict['all_shipments'] = subscription.available_shipments + subscription.extra_shipments
+	date = subscription.renew_date + relativedelta(months=1)
+	context_dict['renew_date'] = date.strftime('%d/%m/%Y')
+	return render(request, 'app/account.html', context_dict)
+
 def registration_subscription(request):
     context_dict = {}
     if request.method == 'POST':
-        selected_plan = p.choice_set.get(pk=request.POST['plan'])
+        selected_plan = request.POST['plan']
         subscription_type = SubscriptionType.objects.get(name = selected_plan)
-        subscription = Subscription.objects.get(user = request.user)
+        subscription = Subscription()
+        subscription.user = request.user
         subscription.level = subscription_type
         subscription.available_shipments = subscription_type.amount_of_shipments
-        subscription.saver = request.POST.get('saver')
-        subscription.save()
         if selected_plan == "Gold":
             subscription.first_addressee_name = request.POST.get('firstname')
             subscription.first_addressee_phone = request.POST.get('firstphone')
+            subscription.saver = request.POST.get('saver')
         elif selected_plan == "Platinum":
             subscription.first_addressee_name = request.POST.get('firstname')
             subscription.first_addressee_phone = request.POST.get('firstphone')
             subscription.second_addressee_name = request.POST.get('secondname')
             subscription.second_addressee_phone = request.POST.get('secondphone')
-    return render(request, 'book/confirmation.html', context_dict)
+        elif selected_plan == "Silver":
+        	subscription.saver = request.POST.get('saver')
+        subscription.save()
+        context_dict['subscription'] = subscription
+    return HttpResponseRedirect('/account')
 
 @login_required
 def add_person(request):
@@ -145,6 +161,8 @@ def register(request):
             user_profile.phone = request.POST.get('phone')
             user_profile.save()
             registered = True
+            user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+            login(request, user)
             return render(request, 'app/package.html', {'user': user})
         else:
             print user_form.errors

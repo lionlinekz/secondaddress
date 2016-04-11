@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)http://mrsw23zs.orzgc3ttozswy3zonfxa.erenta.ru/html/kybook/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<title>SECONDO INDIRIZZO</title>
+{% load staticfiles %}
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
+<!-- Customizable CSS -->
+<link rel="stylesheet" href="{% static 'app/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
+
+
+<!-- Icons/Glyphs -->
+<link rel='stylesheet' href='{% static 'app/css/a.css' %}'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,500,700' rel='stylesheet' type='text/css'>
+
+
+  <link rel="stylesheet" href="{% static 'app/css/brands/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'app/css/brands/line-icons.css' %}.">
+  <link rel="stylesheet" href="{% static 'app/css/brands/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'app/css/brands/img-hover.css' %}">
+<link rel='stylesheet' href='a.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,500,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{% static 'app/css/mvpready-admin.css' %}">
+
+
+
+
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- HTML5 elements and media queries Support for IE8 : HTML5 shim and Respond.js -->
+<!--[if lt IE 9]>
+<script src="/html/kybook/assets/js/html5shiv.js"></script>
+<script src="/html/kybook/assets/js/respond.min.js"></script>
+<![endif]-->
+<meta name="robots" content="none"></head>
+<body>
+
+
+<div class="wrapper">
+
+<!-- ============================================================= HEADER ============================================================= -->
+<header class="header">
+<!-- ============================================================= NAVBAR TOPBAR ============================================================= -->
+<nav class="navbar navbar-top-bar navbar-static-top navbar-collapse collapse navbar-fixed-top">
+<div class="container">
+<ul class="navbar-nav nav navbar-right">
+<li><a href="/logout/">Welcome, {{ user.first_name }} {{ user.last_name }}. LOG OUT</a></li>
+</ul><!-- /.navbar-nav -->
+</div><!-- /.container-->
+</nav><!-- /.navbar-->
+
+ <div id="navbar-1">
+    <!-- .navbar -->
+    <nav id="navbar" class="navbar navbar-default navbar-static" role="navigation">
+    <!-- .container -->
+    <div class="container">
+      <!-- .row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- /.navbar-header -->
+          <!-- .navbar-collapse -->
+            <!-- .navbar-nav -->
+            <ul class="nav navbar-nav">
+              <!-- .dropdown -->
+              <li><a href="#">Change Plan</a></li>
+              <li><a href="#">Keep shipments</a></li>
+              <li><a href="#">Add/Edit addressee</a></li>
+              <li><a href="#">Open a problem ticket</a></li>
+              <li><a href="#">Edit personal details</a></li>
+              <!-- /.dropdown -->
+          
+            </ul>
+            <!-- /.navbar-nav -->
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.row -->
+      </div>
+    </div>
+    <!-- /.container -->
+    </nav>
+    <!-- /.navbar -->
+  </div>
+  <!-- /#navbar-1 -->
+
+<!-- ============================================================= NAVBAR TOPBAR : END ============================================================= --> 
+</header><!-- /.header -->
+<!-- ============================================================= HEADER : END ============================================================= -->
+<div class="content">
+<div class="home page">
+<!-- .slider -->
+
+<br>
+
+<div class="container">
+
+        <div class="row">
+
+          <div class="col-md-4">
+
+            <div class="portlet portlet-default">
+
+              <div class="portlet-header">
+                <h4 class="portlet-title">
+                  Your membership
+                </h4>
+              </div> <!-- /.portlet-header -->
+              <div class="portlet-body">
+                <admin>All shipments</admin>
+              	<value class="pull-right kv-value"> {% if platinum %}unlimited{% else %}{{ all_shipments }}{% endif %}</value>
+              	<p><br></p>
+              	<admin>Under subscription</admin>
+              	<value class="pull-right kv-value">{% if platinum %}unlimited{% else %}{{ subscription.available_shipments }}{% endif %}</value>
+              	<p><br> </p>
+              	<admin>Bought shipments</admin>
+              	<value class="pull-right kv-value">{{ subscription.extra_shipments }}</value>
+              	<p><br></p>
+              	<admin>Renew Date</admin>
+              	<value class="pull-right kv-value">{{ renew_date }}</value>
+              	
+
+              	
+
+              </div> <!-- /.portlet-header -->
+              	
+            </div> <!-- /.portlet -->
+            
+          </div> <!-- /.col -->
+
+
+          <div class="col-md-4">
+          	<div class="portlet portlet-default">
+
+              <div class="portlet-header">
+                <h4 class="portlet-title">
+                  Your plan
+                </h4>
+              </div> <!-- /.portlet-header -->
+                <admin> Your current plan is <strong>{{ subscription.level }}</strong>. </admin>
+        				<p><a>See prices</a></p>
+                {% if subscription.saver %}
+        				<admin> You keep unused shipments</admin>
+                {% else %}
+                <admin> You do not keep unused shipments</admin>
+                {% endif %}
+        				<p><a>What does that mean?</a></p>
+                
+
+            </div> <!-- /.portlet -->
+
+            
+
+          </div> <!-- /.col -->
+          <div class="col-md-4">
+          	<div class="portlet portlet-default">
+
+              <div class="portlet-header">
+                <h4 class="portlet-title">
+                  Your addressees
+                </h4>
+              </div> <!-- /.portlet-header -->
+                <admin>{{ subscription.first_addressee_name }}</admin>
+              	<value class="pull-right kv-value">{{ subscription.first_addressee_phone }}</value>
+              	<p><br></p>
+              	<admin>{{ subscription.second_addressee_name }}</admin>
+              	<value class="pull-right kv-value">{{ subscription.second_addressee_phone }}</value>
+              	<p><br></p>
+
+            </div> <!-- /.portlet -->
+
+            
+
+          </div> <!-- /.col -->
+
+        </div> <!-- /.row -->
+
+        <br>
+
+        <div class="row">
+
+            <div class="col-md-7">
+            	
+            	<div class="portlet portlet-default">
+                <div class="portlet-header">
+                  <h4 class="portlet-title">
+                    Your orders
+                  </h4>
+                </div> <!-- /.portlet-header -->
+                
+                <div class="portlet-body">
+                <table class="table">  
+                	<tbody> 
+                		<tr> 
+                			<th scope="row">
+                				<div class="progress-stat-label">
+		                      		22/10/2015
+		                    	</div>
+                			</th> 
+                			<td>
+                				<div class="progress-stat-label">
+		                      		Bananas and Kiwis Local Shop
+		                    	</div>
+		                    </td> 
+                			<td>
+                				<div class="progress-stat-label">
+		                      		+46 1654651524
+		                    	</div>
+                			</td> 
+                			<td>
+                				<div class="progress-stat-label">
+		                      		view on map
+		                    	</div>
+                			</td> 
+                		</tr> 
+                		<tr> 
+                			<th scope="row">
+                				<div class="progress-stat-label">
+		                      		22/10/2015
+		                    	</div>
+                			</th> 
+                			<td>
+                				<div class="progress-stat-label">
+		                      		Bananas and Kiwis Local Shop
+		                    	</div>
+		                    </td> 
+                			<td>
+                				<div class="progress-stat-label">
+		                      		+46 1654651524
+		                    	</div>
+                			</td> 
+                			<td>
+                				<div class="progress-stat-label">
+		                      		view on map
+		                    	</div>
+                			</td> 
+                		</tr> 
+                		                		<tr> 
+                			<th scope="row">
+                				<div class="progress-stat-label">
+		                      		22/10/2015
+		                    	</div>
+                			</th> 
+                			<td>
+                				<div class="progress-stat-label">
+		                      		Bananas and Kiwis Local Shop
+		                    	</div>
+		                    </td> 
+                			<td>
+                				<div class="progress-stat-label">
+		                      		+46 1654651524
+		                    	</div>
+                			</td> 
+                			<td>
+                				<div class="progress-stat-label">
+		                      		view on map
+		                    	</div>
+                			</td> 
+                		</tr> 
+                	</tbody>
+                </table>
+                </div> <!-- /.portlet-body -->
+                
+              </div> <!-- /.portlet -->
+
+              
+
+            </div> <!-- /.col -->
+
+
+            
+
+    </div> <!-- /.container -->
+
+</div><!--/container-->
+                      <div class="col-md-5">
+            <div class="portlet portlet-default">
+
+              <div class="portlet-header">
+                  <h4 class="portlet-title">
+                    Your addresses
+                  </h4>
+                </div> <!-- /.portlet-header -->
+                
+                <div class="portlet-body">
+                                <table class="table">  
+                  <tbody> 
+                    <tr> 
+                      <th scope="row">
+                        <div class="progress-stat-label">
+                              1
+                          </div>
+                      </th> 
+                      <td>
+                        <div class="progress-stat-label">
+                              Banana and Kiwi Shop
+                          </div>
+                        </td> 
+                    </tr> 
+                     <tr> 
+                      <th scope="row">
+                        <div class="progress-stat-label">
+                              2
+                          </div>
+                      </th> 
+                      <td>
+                        <div class="progress-stat-label">
+                              Strawberry Post
+                          </div>
+                        </td> 
+                    </tr> 
+                     <tr> 
+                      <th scope="row">
+                        <div class="progress-stat-label">
+                              3
+                          </div>
+                      </th> 
+                      <td>
+                        <div class="progress-stat-label">
+                              Ice Cream
+                          </div>
+                        </td> 
+                    </tr> 
+                  </tbody>
+                </table>
+                </div> <!-- /.portlet-body -->
+
+            </div> <!-- /.portlet -->
+
+            
+
+          </div> <!-- /.col -->
+			<!--=== End Job Partners ===-->
+	
+
+
+
+
+<!-- ============================================================= FOOTER ============================================================= -->
+<footer class="footer">
+<div class="sub-footer">
+
+</div><!-- /.sub-footer -->
+<div class="main-footer">
+<div class="container">
+<div class="row footer-widgets">
+<div class="col-md-3 col-sm-6 col-xs-12">
+<!-- ============================================================= FOOTER SHIPPING DELIVERY ============================================================= -->
+<div class="module">
+<div class="module-heading">
+<h4 class="module-title">POLICY</h4>
+</div><!-- /.module-heading -->
+<div class="module-body">
+<ul class="list-unstyled list-link">
+<li><a href="#">For customers</a></li>
+<li><a href="#">For shops</a></li>
+</ul><!-- /.list-link -->
+</div><!-- /.module-body -->
+</div><!-- /.module -->
+<!-- ============================================================= FOOTER SHIPPING DELIVERY : END ============================================================= --> </div><!-- /.col -->
+<div class="col-md-3 col-sm-6 col-xs-12">
+<!-- ============================================================= FOOTER INFORMATION ============================================================= -->
+<div class="module">
+<div class="module-heading">
+<h4 class="module-title">Information</h4>
+</div><!-- /.module-heading -->
+<div class="module-body">
+<ul class="list-unstyled list-link">
+<li><a href="#">Our requisites</a></li>
+<li><a href="#">Careers</a></li>
+</ul><!-- /.list-link -->
+</div><!-- /.module-body -->
+</div><!-- /.module -->
+<!-- ============================================================= FOOTER INFORMATION : END ============================================================= --> </div><!-- /.col -->
+<div class="col-md-3 col-sm-6 col-xs-12">
+<!-- ============================================================= FOOTER QUICK HELP ============================================================= -->
+<div class="module">
+<div class="module-heading">
+<h4 class="module-title">Quick Help</h4>
+</div><!-- /.module-heading -->
+<div class="module-body">
+<ul class="list-unstyled list-link">
+<li><a href="#">Customer Service</a></li>
+<li><a href="#">Problem Resolution</a></li>
+</ul><!-- /.list-link -->
+</div><!-- /.module-body -->
+</div><!-- /.module -->
+<!-- ============================================================= FOOTER QUICK HELP : END ============================================================= -->
+</div><!-- /.col -->
+<div class="col-md-3 col-sm-6 col-xs-12">
+<!-- ============================================================= FOOTER PAYMENT ============================================================= -->
+<div class="module">
+<div class="module-heading">
+<h4 class="module-title">Payment</h4>
+<p class="module-subtitle">We now accept payment</p>
+</div><!-- /.module-heading -->
+<div class="module-body">
+<ul class="nav nav-pills payment-list">
+<li><img src="./KYBook_files/visa.png" alt="" pagespeed_url_hash="2970948746" data-pagespeed-onload="pagespeed.CriticalImages.checkImageForCriticality(this);" pagespeed_lsc_url="http://mrsw23zs.orzgc3ttozswy3zonfxa.erenta.ru/html/kybook/assets/images/payments/visa.png" onload="var elem=this;if (this==window) elem=document.body;elem.setAttribute(&#39;data-pagespeed-loaded&#39;, 1)" data-pagespeed-loaded="1"></li>
+<li><img src="./KYBook_files/mastercard.png" alt="" pagespeed_url_hash="1334951263" data-pagespeed-onload="pagespeed.CriticalImages.checkImageForCriticality(this);" pagespeed_lsc_url="http://mrsw23zs.orzgc3ttozswy3zonfxa.erenta.ru/html/kybook/assets/images/payments/mastercard.png" onload="var elem=this;if (this==window) elem=document.body;elem.setAttribute(&#39;data-pagespeed-loaded&#39;, 1)" data-pagespeed-loaded="1"></li>
+<li><img src="./KYBook_files/paypal.png" alt="" pagespeed_url_hash="771284832" data-pagespeed-onload="pagespeed.CriticalImages.checkImageForCriticality(this);" pagespeed_lsc_url="http://mrsw23zs.orzgc3ttozswy3zonfxa.erenta.ru/html/kybook/assets/images/payments/paypal.png" onload="var elem=this;if (this==window) elem=document.body;elem.setAttribute(&#39;data-pagespeed-loaded&#39;, 1)" data-pagespeed-loaded="1"></li>
+<li><img src="./KYBook_files/ebay.png" alt="" pagespeed_url_hash="3362576994" data-pagespeed-onload="pagespeed.CriticalImages.checkImageForCriticality(this);" pagespeed_lsc_url="http://mrsw23zs.orzgc3ttozswy3zonfxa.erenta.ru/html/kybook/assets/images/payments/ebay.png" onload="var elem=this;if (this==window) elem=document.body;elem.setAttribute(&#39;data-pagespeed-loaded&#39;, 1)" data-pagespeed-loaded="1"></li>
+<li><img src="./KYBook_files/americanexpress.png" alt="" pagespeed_url_hash="644464837" data-pagespeed-onload="pagespeed.CriticalImages.checkImageForCriticality(this);" pagespeed_lsc_url="http://mrsw23zs.orzgc3ttozswy3zonfxa.erenta.ru/html/kybook/assets/images/payments/americanexpress.png" onload="var elem=this;if (this==window) elem=document.body;elem.setAttribute(&#39;data-pagespeed-loaded&#39;, 1)" data-pagespeed-loaded="1"></li>
+</ul><!-- /.payment-list -->
+</div><!-- /.module-body -->
+</div><!-- /.module -->
+<!-- ============================================================= FOOTER PAYMENT : END ============================================================= --> </div><!-- /.col -->
+</div><!-- /.row -->
+<!-- ============================================================= FOOTER NAVBAR ============================================================= -->
+<div class="navbar-footer navbar-static-bottom clearfix">
+<p class="navbar-text">Copyright © 2016</p>
+</div><!-- /.navbar -->
+<!-- ============================================================= FOOTER NAVBAR : END ============================================================= -->
+</div><!-- /.container -->
+</div><!-- /.main-footer -->
+</footer><!-- /.footer -->
+<!-- ============================================================= FOOTER : END ============================================================= --> </div><!-- /.wrapper -->
+<!-- JavaScripts placed at the end of the document so the pages load faster -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="./KYBook_files/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="./KYBook_files/bootstrap.min.js"></script>
+<script type="text/javascript" src="./KYBook_files/bootstrap-hover-dropdown.min.js"></script>
+<script type="text/javascript" src="./KYBook_files/echo.min.js"></script>
+<script type="text/javascript" src="./KYBook_files/jquery.easing.min.js"></script>
+
+<script type="text/javascript" src="./KYBook_files/wow.min.js"></script>
+<script type="text/javascript" src="./KYBook_files/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="./KYBook_files/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./KYBook_files/scripts.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+
+		<script type="text/javascript" src="./jobs_files/jquery.parallax.js"></script>
+		<script type="text/javascript" src="./jobs_files/touch.js"></script>
+		<script type="text/javascript" src="./jobs_files/modernizr.js"></script>
+
+
+<script type="text/javascript">
+    function resetActive(event, percent, step) {
+        $(".progress-bar").css("width", percent + "%").attr("aria-valuenow", percent);
+        $(".progress-completed").text(percent + "%");
+
+        $("div").each(function () {
+            if ($(this).hasClass("activestep")) {
+                $(this).removeClass("activestep");
+            }
+        });
+
+        if (event.target.className == "col-md-4") {
+            $(event.target).addClass("activestep");
+        }
+        else {
+            $(event.target.parentNode).addClass("activestep");
+        }
+
+        hideSteps();
+        showCurrentStepInfo(step);
+    }
+
+    function hideSteps() {
+        $("div").each(function () {
+            if ($(this).hasClass("activeStepInfo")) {
+                $(this).removeClass("activeStepInfo");
+                $(this).addClass("hiddenStepInfo");
+            }
+        });
+    }
+
+    function showCurrentStepInfo(step) {        
+        var id = "#" + step;
+        $(id).addClass("activeStepInfo");
+    }
+</script>
+<script>
+$("#first").change(function() {
+    if(this.checked) {
+    	$("#firstprice").text("€6.38");
+        //Do stuff
+    }else{
+    	$("#firstprice").text("€4.89");
+    }
+});
+$("#second").change(function() {
+    if(this.checked) {
+    	$("#secondprice").text("€8.68");
+        //Do stuff
+    }else{
+    	$("#secondprice").text("€6.79");
+    }
+});
+</script>
+</body></html>
