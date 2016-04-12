@@ -77,7 +77,7 @@ class UserProfile(models.Model):
     def __str__(self):  
           return "%s's profile" % self.user 
 
-class Addresses(models.Model):
+class Address(models.Model):
 	subscription = models.ForeignKey(Subscription)
 	shopkeeper = models.ForeignKey(Shopkeeper)
 

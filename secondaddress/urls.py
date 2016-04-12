@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^get_shipment/$', views.get_shipment, name='get_shipment'),
     url(r'^registration_subscription/$', views.registration_subscription, name='registration_subscription'),
     url(r'^account/$', views.account),
+    url(r'^add_address/$', views.add_address),
     url(r'^confirmation/$', views.confirmation),
     url(r'^subscribe_pay/$', views.subscribe_pay),
     url(r'^subscribe', views.subscribe),

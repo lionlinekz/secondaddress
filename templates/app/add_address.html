@@ -1,0 +1,48 @@
+{% extends 'app/account.html' %}
+
+{% load staticfiles %}
+
+
+{% block body_block %}
+        <div class="row">
+            <div class="col-md-3">
+            	<div class="portlet portlet-default">
+	                <div class="portlet-header">
+	                  <h4 class="portlet-title">
+	                    Add addresses
+	                  </h4>
+	                </div> <!-- /.portlet-header --> 
+	                <div class="portlet-body">
+		                <form class="form-horizontal">
+						  <div class="form-group">
+						    <select class="form-control">
+							  <option>1</option>
+							  <option>2</option>
+							  <option>3</option>
+							  <option>4</option>
+							  <option>5</option>
+							</select>
+						  </div>
+						  <div class="form-group">
+						    <div class="col-sm-offset-2 col-sm-10">
+						      <button type="submit" class="btn btn-outline-inversed btn-lg" >Add address</button>
+						    </div>
+						  </div>
+						</form>
+						                </div> <!-- /.portlet-body -->
+            </div> <!-- /.portlet -->
+        </div> <!-- /.col -->
+                    <div class="col-md-9">
+            	<div class="portlet portlet-default">
+	                <div class="portlet-header">
+	                  <h4 class="portlet-title">
+	                    Map
+	                  </h4>
+	                </div> <!-- /.portlet-header --> 
+	                <div class="portlet-body">
+		                
+					</div> <!-- /.portlet-body -->
+            </div> <!-- /.portlet -->
+        </div> <!-- /.col -->
+    </div> <!-- /.container -->
+{% endblock %}

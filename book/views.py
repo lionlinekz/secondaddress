@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from book.models import Subscription, SubscriptionType, PersonEmpowered, UserProfile
+from book.models import Subscription, SubscriptionType, PersonEmpowered, UserProfile, Address, Shopkeeper
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
@@ -83,6 +83,19 @@ def account(request):
 	date = subscription.renew_date + relativedelta(months=1)
 	context_dict['renew_date'] = date.strftime('%d/%m/%Y')
 	return render(request, 'app/account.html', context_dict)
+
+def add_address(request):
+	context_dict = {}
+	subscription = Subscription.objects.get(user = request.user)
+	shopkeepers = Shopkeeper.objects.all()
+	addresses = Address.objects.filter(subscription = subscription)
+	context_dict['addresses'] = addresses
+	context_dict['shopkeepers'] = shopkeepers
+	if len(addresses) < subscription.level.amount_of_addresses:
+		context_dict['full'] = False
+	else:
+		context_dict['full'] = True
+	return render(request, 'app/add_address.html', context_dict)
 
 def registration_subscription(request):
     context_dict = {}
