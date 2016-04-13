@@ -3,28 +3,28 @@
 {% load staticfiles %}
 
 {% block menu_block %}
-<li><a href="/account/">My account</a></li>
-<li class="chosen_item"><a href="/change_plan/">Change Plan</a></li>
-<li><a href="#">Keep shipments</a></li>
-<li><a href="#">Add/Edit addressee</a></li>
-<li><a href="/add_address/">Add address</a></li>
-<li><a href="#">Edit details</a></li>
-{% endblock %}
-
-{% block body_block %}
-     <script src="{% static 'app/js/package.js' %}"></script>
-        <div class="row">
+              <!-- .dropdown -->
+              <li><a href="/account/">My account</a></li>
+              <li class="chosen_item"><a href="/change_plan/">Change Plan</a></li>
+              <li><a href="#">Keep shipments</a></li>
+              <li><a href="#">Add/Edit addressee</a></li>
+              <li><a href="/add_address/">Add address</a></li>
+              <li><a href="#">Edit details</a></li>
+              <!-- /.dropdown -->
+                   {% endblock %}
+ {% block body_block %}
+<div class="row">
             <div class="col-md-3">
-            	<div class="portlet portlet-default">
-	                <div class="portlet-header">
-	                  <h4 class="portlet-title">
-	                    Change subscription plan
-	                  </h4>
-	                </div> <!-- /.portlet-header --> 
-	                <div class="portlet-body">
-	                					<form  action="/change_plan/" method="post" id="myForm">
-	                					{% csrf_token %}
-	                						<label class="radio-inline">
+              <div class="portlet portlet-default">
+                  <div class="portlet-header">
+                    <h4 class="portlet-title">
+                      Change subscription plan
+                    </h4>
+                  </div> <!-- /.portlet-header --> 
+                  <div class="portlet-body">
+                            <form  action="/change_plan/" method="post" id="myForm">
+                            {% csrf_token %}
+                              <label class="radio-inline">
                                               <input type="radio" name="plan" id="silver_button" value="Silver"> Silver
                                             </label>
                                             <label class="radio-inline">
@@ -35,7 +35,7 @@
                                             </label>
                                             <div class="form-group"  id="goldname">
                                                 <label>first person name:</label><input type="text" name="firstname"  class="form-username form-control" >
-                                                <label>first person phone:</label><input type="text" name="firstphone" class="form-username form-control" id="form-username">
+                                                <label>first person phone:</label><input type="text" name="firstphone" class="form-username form-control">
                                             </div>
                                             <div class="form-group"  id="platinumname">
                                                 <label>second person name:</label><input type="text" name="secondname"  class="form-username form-control" id="form-username">
@@ -48,82 +48,98 @@
                                                 + €1.49 to keep unused shipments
                                               </label>
                                             </div>
-                                            <button type="submit" class="btn btn-outline-inversed btn-lg">Change plan</button>
+                                            <div class="checkbox" id="goldcheck">
+                                              <label>
+
+                                                <input type="checkbox" name="saver" id="first">
+                                                + €1.89 to keep unused shipments
+                                              </label>
+                                            </div>
+                                            <button type="submit" class="btn btn-outline-inversed btn-lg" id="about-btn">Change plan</button>
                                         </form>
-						                </div> <!-- /.portlet-body -->
+                            </div> <!-- /.portlet-body -->
             </div> <!-- /.portlet -->
         </div> <!-- /.col -->
                     <div class="col-md-9">
                     <div class ="row">
-            	<div class="portlet portlet-default">
-	                <div class="portlet-header">
-	                  <h4 class="portlet-title">
-	                    Map
-	                  </h4>
-	                </div> <!-- /.portlet-header --> 
-	                <div class="portlet-body">
-		                <div class="price_table">
-		<div class="column_1">
-		<ul>
-		<li class="header_row_1 align_center">
-		<div class="pack-title">Silver</div>
-		</li>
-		<li class="header_row_2 align_center">
-		<div class="price"><span id="firstprice">€4.89</span></div>
-		<div class="time">per month + ITA</div>
-		</li>
-		<li class="row_style_1 align_center"><span>7 days week</span></li>
-		<li class="row_style_1 align_center"><span>Notification of receipt</span></li>
-		<li class="row_style_1 align_center"><span>1 address</span></li>
-		<li class="row_style_1 align_center no-option"><span>3 shipments</span></li>
-		<li class="row_style_1 align_center no-option"><span>1 persons empowered</span></li>
-		<li class="row_style_1 align_center no-option"><span><input type="checkbox"> + €1.49 to keep unused shipments </span></li>
-		<li class="row_style_1 align_center no-option"></li>
-		</ul></div><!--end column-->
+              <div class="portlet portlet-default">
+                  <div class="portlet-header">
+                    <h4 class="portlet-title">
+                      Map
+                    </h4>
+                  </div> <!-- /.portlet-header --> 
+                  <div class="portlet-body">
+                    <div class="price_table">
+    <div class="column_1">
+    <ul>
+    <li class="header_row_1 align_center">
+    <div class="pack-title">Silver</div>
+    </li>
+    <li class="header_row_2 align_center">
+    <div class="price"><span id="firstprice">€4.89</span></div>
+    <div class="time">per month + ITA</div>
+    </li>
+    <li class="row_style_1 align_center"><span>7 days week</span></li>
+    <li class="row_style_1 align_center"><span>Notification of receipt</span></li>
+    <li class="row_style_1 align_center"><span>1 address</span></li>
+    <li class="row_style_1 align_center no-option"><span>3 shipments</span></li>
+    <li class="row_style_1 align_center no-option"><span>1 persons empowered</span></li>
+    <li class="row_style_1 align_center no-option"><span><input type="checkbox"> + €1.49 to keep unused shipments </span></li>
+    <li class="row_style_1 align_center no-option"></li>
+    </ul></div><!--end column-->
 
-		<div class="column_1">
-		<ul>
-		<li class="header_row_1 align_center">
-		<div class="pack-title">Gold</div>
-		</li>
-		<li class="header_row_2 align_center">
-		<div class="price"><span id="secondprice">€6.79</span></div>
-		<div class="time">per month + ITA</div>
-		</li>
-		<li class="row_style_2 align_center"><span>7 days week</span></li>
-		<li class="row_style_2 align_center"><span>Notification of receipt</span></li>
-		<li class="row_style_2 align_center"><span>2 addresses</span></li>
-		<li class="row_style_2 align_center"><span>6 shipments</span></li>
-		<li class="row_style_2 align_center no-option"><span>2 persons empowered</span></li>
-		<li class="row_style_2 align_center no-option"><span><input type="checkbox"> + $1.89 to keep unused shipments </span></li>
-		<li class="row_style_2 align_center no-option"></li>
-		</ul></div><!--end column-->
+    <div class="column_1">
+    <ul>
+    <li class="header_row_1 align_center">
+    <div class="pack-title">Gold</div>
+    </li>
+    <li class="header_row_2 align_center">
+    <div class="price"><span id="secondprice">€6.79</span></div>
+    <div class="time">per month + ITA</div>
+    </li>
+    <li class="row_style_2 align_center"><span>7 days week</span></li>
+    <li class="row_style_2 align_center"><span>Notification of receipt</span></li>
+    <li class="row_style_2 align_center"><span>2 addresses</span></li>
+    <li class="row_style_2 align_center"><span>6 shipments</span></li>
+    <li class="row_style_2 align_center no-option"><span>2 persons empowered</span></li>
+    <li class="row_style_2 align_center no-option"><span><input type="checkbox"> + $1.89 to keep unused shipments </span></li>
+    <li class="row_style_2 align_center no-option"></li>
+    </ul></div><!--end column-->
 
-		<div class="column_1">
-		<ul>
-		<li class="header_row_1 align_center">
-		<div class="pack-title">Platinum</div>
-		</li>
-		<li class="header_row_2 align_center">
-		<div class="price"><span>€9.81</span></div>
-		<div class="time">per month + ITA</div>
-		</li>
-		<li class="row_style_1 align_center"><span>7 days week</span></li>
-		<li class="row_style_1 align_center"><span>Notification of receipt</span></li>
-		<li class="row_style_1 align_center"><span>3 addresses</span></li>
-		<li class="row_style_1 align_center"><span>unlimited</span></li>
-		<li class="row_style_1 align_center"><span>3 persons empowered</span></li>
-		<li class="row_style_1 align_center no-option"><span>all unused shipments are kept for free </span></li>
-		<li class="row_style_1 align_center no-option"></li>
-		</ul></div><!--end column-->
+    <div class="column_1">
+    <ul>
+    <li class="header_row_1 align_center">
+    <div class="pack-title">Platinum</div>
+    </li>
+    <li class="header_row_2 align_center">
+    <div class="price"><span>€9.81</span></div>
+    <div class="time">per month + ITA</div>
+    </li>
+    <li class="row_style_1 align_center"><span>7 days week</span></li>
+    <li class="row_style_1 align_center"><span>Notification of receipt</span></li>
+    <li class="row_style_1 align_center"><span>3 addresses</span></li>
+    <li class="row_style_1 align_center"><span>unlimited</span></li>
+    <li class="row_style_1 align_center"><span>3 persons empowered</span></li>
+    <li class="row_style_1 align_center no-option"><span>all unused shipments are kept for free </span></li>
+    <li class="row_style_1 align_center no-option"></li>
+    </ul></div><!--end column-->
 
 
-	</div><!--end price table-->
-					</div> <!-- /.portlet-body -->
+  </div><!--end price table-->
+          </div> <!-- /.portlet-body -->
             </div> <!-- /.portlet -->
         </div> <!-- /.col -->
         </div>
     </div> <!-- /.container -->
-    <br>
 
-{% endblock %}
+<br><br>
+
+
+        <!-- Javascript -->
+        <script src="{% static 'login/js/jquery-1.11.1.min.js' %}"></script>
+        <script src="{% static 'login/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'login/js/jquery.backstretch.js' %}"></script>
+        <script src="{% static 'login/js/scripts.js' %}"></script>
+<script src="{% static 'app/js/package.js' %}"></script>
+                   {% endblock %}
+
