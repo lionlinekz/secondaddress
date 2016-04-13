@@ -8,12 +8,14 @@
 <meta name="description" content="">
 <title>SECONDO INDIRIZZO</title>
 {% load staticfiles %}
+
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
 <!-- Customizable CSS -->
 <link rel="stylesheet" href="{% static 'app/css/main.css' %}">
-<link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
 
+
+<link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
 
 <!-- Icons/Glyphs -->
 <link rel='stylesheet' href='{% static 'app/css/a.css' %}'>
@@ -27,7 +29,6 @@
 <link rel='stylesheet' href='a.css'>
 <link href='http://fonts.googleapis.com/css?family=Lato:300,400,500,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{% static 'app/css/mvpready-admin.css' %}">
-
 
 
 
@@ -70,11 +71,14 @@
             <!-- .navbar-nav -->
             <ul class="nav navbar-nav">
               <!-- .dropdown -->
-              <li><a href="#">Change Plan</a></li>
+              {% block menu_block %}
+              <li class="chosen_item"><a href="/account/">My account</a></li>
+              <li><a href="/change_plan/">Change Plan</a></li>
               <li><a href="#">Keep shipments</a></li>
               <li><a href="#">Add/Edit addressee</a></li>
-              <li><a href="#">Open a problem ticket</a></li>
-              <li><a href="#">Edit personal details</a></li>
+              <li><a href="/add_address/">Add address</a></li>
+              <li><a href="#">Edit details</a></li>
+              {% endblock %}
               <!-- /.dropdown -->
           
             </ul>
@@ -244,6 +248,12 @@
                     Your addresses
                   </h4>
                 </div> <!-- /.portlet-header -->
+                <div class="portlet-body">
+                    {% for address in addresses %}
+                     {{ forloop.counter }}. {{ address.shopkeeper.postal_code}} <br>
+                    {% endfor %}
+                    <br>
+                </div>
               </div>
             </div>
           </div>

@@ -68,7 +68,7 @@ class Shopkeeper(models.Model):
 	timetable = models.ForeignKey(Day)
 
 	def __unicode__(self):
-		return self.user.name
+		return self.user.username
 
 class UserProfile(models.Model):  
     user = models.OneToOneField(User)
@@ -82,4 +82,4 @@ class Address(models.Model):
 	shopkeeper = models.ForeignKey(Shopkeeper)
 
 	def __unicode__(self):
-		return shopkeeper.shop_name
+		return self.shopkeeper.shop_name
