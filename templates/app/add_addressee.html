@@ -1,0 +1,72 @@
+{% extends 'app/account.html' %}
+{% load staticfiles %}
+{% block menu_block %}
+<!-- .dropdown -->
+<li><a href="/account/">My account</a></li>
+<li><a href="/change_plan/">Change Plan</a></li>
+<li><a href="/keep_shipments/">Keep shipments</a></li>
+<li class="chosen_item"><a href="/add_addressee/">Add/Edit addressee</a></li>
+<li><a href="/add_address/">Add address</a></li>
+<li><a href="/edit_details/">Edit details</a></li>
+<!-- /.dropdown -->
+{% endblock %}
+{% block body_block %}
+<div class="col-md-4">
+  <div class ="row">
+    <div class="portlet portlet-default">
+      <div class="portlet-header">
+        <h4 class="portlet-title">
+          Your plan
+        </h4>
+      </div> <!-- /.portlet-header --> 
+      <div class="portlet-body">
+        <admin> Your current plan is <strong>{{ subscription.level }}</strong>. </admin>
+        <p><a>See prices</a></p>
+        {% if subscription.saver %}
+        <admin> You keep unused shipments</admin>
+        {% else %}
+        <admin> You do not keep unused shipments</admin>
+        {% endif %}
+        <p><a>What does that mean?</a></p>
+      </div> <!-- /.portlet-body -->
+    </div> <!-- /.portlet -->
+  </div> <!-- /.col -->
+</div>
+<div class="col-md-8">
+  <div class ="row">
+    <div class="portlet portlet-default">
+      <div class="portlet-header">
+        <h4 class="portlet-title">
+          Add/Edit People Empowered
+        </h4>
+      </div> <!-- /.portlet-header --> 
+      <div class="portlet-body">
+        <form  action="/add_addressee/" method="post" id="myForm">
+          {% csrf_token %}
+           {% if gold or platinum %}
+          <div class="form-group"  id="goldname">
+            <label>first person name:</label><input type="text" name="firstname"  class="form-username form-control" value="{{ subscription.first_addressee_name }}">
+            <label>first person phone:</label><input type="text" name="firstphone" class="form-username form-control" value="{{ subscription.first_addressee_phone }}">
+          </div>
+           {% if platinum %}
+          <div class="form-group"  id="platinumname">
+            <label>second person name:</label><input type="text" name="secondname"  class="form-username form-control" id="form-username" value="{{ subscription.second_addressee_name }}">
+            <label>second person phone:</label><input type="text" name="secondphone"  class="form-username form-control" id="form-username" value="{{ subscription.second_addressee_phone }}">
+          </div>
+           {% endif %}
+          <button type="submit" class="btn btn-outline-inversed btn-lg" id="about-btn">Save</button>
+          {% endif %}
+        </form>
+      </div> <!-- /.portlet-body -->
+    </div> <!-- /.portlet -->
+  </div> <!-- /.col -->
+
+</div>
+<br><br><br><br><br><br>
+<!-- Javascript -->
+<script src="{% static 'login/js/jquery-1.11.1.min.js' %}"></script>
+<script src="{% static 'login/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'login/js/jquery.backstretch.js' %}"></script>
+<script src="{% static 'login/js/scripts.js' %}"></script>
+<script src="{% static 'app/js/package.js' %}"></script>
+{% endblock %}

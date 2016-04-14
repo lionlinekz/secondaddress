@@ -6,10 +6,10 @@
               <!-- .dropdown -->
               <li><a href="/account/">My account</a></li>
               <li class="chosen_item"><a href="/change_plan/">Change Plan</a></li>
-              <li><a href="#">Keep shipments</a></li>
-              <li><a href="#">Add/Edit addressee</a></li>
+              <li><a href="/keep_shipments/">Keep shipments</a></li>
+              <li><a href="/add_addressee/">Add/Edit addressee</a></li>
               <li><a href="/add_address/">Add address</a></li>
-              <li><a href="#">Edit details</a></li>
+              <li><a href="/edit_details/">Edit details</a></li>
               <!-- /.dropdown -->
                    {% endblock %}
  {% block body_block %}
@@ -24,7 +24,9 @@
                   <div class="portlet-body">
                             <form  action="/change_plan/" method="post" id="myForm">
                             {% csrf_token %}
-                              <label class="radio-inline">
+                            				<strong><h3><span id="firstprice">€9.68</span> per month + ITA</h3></strong>
+
+                             				<label class="radio-inline">
                                               <input type="radio" name="plan" id="silver_button" value="Silver"> Silver
                                             </label>
                                             <label class="radio-inline">
@@ -51,7 +53,7 @@
                                             <div class="checkbox" id="goldcheck">
                                               <label>
 
-                                                <input type="checkbox" name="saver" id="first">
+                                                <input type="checkbox" name="saver" id="second">
                                                 + €1.89 to keep unused shipments
                                               </label>
                                             </div>
@@ -65,7 +67,7 @@
               <div class="portlet portlet-default">
                   <div class="portlet-header">
                     <h4 class="portlet-title">
-                      Map
+                      Price table
                     </h4>
                   </div> <!-- /.portlet-header --> 
                   <div class="portlet-body">
@@ -76,7 +78,7 @@
     <div class="pack-title">Silver</div>
     </li>
     <li class="header_row_2 align_center">
-    <div class="price"><span id="firstprice">€4.89</span></div>
+    <div class="price">€4.89</div>
     <div class="time">per month + ITA</div>
     </li>
     <li class="row_style_1 align_center"><span>7 days week</span></li>

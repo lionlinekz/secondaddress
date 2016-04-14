@@ -75,10 +75,10 @@
               {% block menu_block %}
               <li class="chosen_item"><a href="/account/">My account</a></li>
               <li><a href="/change_plan/">Change Plan</a></li>
-              <li><a href="#">Keep shipments</a></li>
-              <li><a href="#">Add/Edit addressee</a></li>
+              <li><a href="/keep_shipments/">Keep shipments</a></li>
+              <li><a href="/add_addressee/">Add/Edit addressee</a></li>
               <li><a href="/add_address/">Add address</a></li>
-              <li><a href="#">Edit details</a></li>
+              <li><a href="/edit_details/">Edit details</a></li>
               {% endblock %}
               <!-- /.dropdown -->
           
@@ -172,12 +172,18 @@
                   Your addressees
                 </h4>
               </div> <!-- /.portlet-header -->
+                {% if platinum %}
                 <admin>{{ subscription.first_addressee_name }}</admin>
               	<value class="pull-right kv-value">{{ subscription.first_addressee_phone }}</value>
               	<p><br></p>
               	<admin>{{ subscription.second_addressee_name }}</admin>
               	<value class="pull-right kv-value">{{ subscription.second_addressee_phone }}</value>
               	<p><br></p>
+                {% elif gold %}
+                <admin>{{ subscription.first_addressee_name }}</admin>
+                <value class="pull-right kv-value">{{ subscription.first_addressee_phone }}</value>
+                <p><br></p>
+                {% endif %}
 
             </div> <!-- /.portlet -->
 

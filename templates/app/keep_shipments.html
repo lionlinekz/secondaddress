@@ -1,0 +1,54 @@
+{% extends 'app/account.html' %}
+
+{% load staticfiles %}
+
+{% block menu_block %}
+<!-- .dropdown -->
+<li><a href="/account/">My account</a></li>
+<li><a href="/change_plan/">Change Plan</a></li>
+<li class="chosen_item"><a href="/keep_shipments/">Keep shipments</a></li>
+<li><a href="/add_addressee/">Add/Edit addressee</a></li>
+<li><a href="/add_address/">Add address</a></li>
+<li><a href="/edit_details/">Edit details</a></li>
+<!-- /.dropdown -->
+{% endblock %}
+{% block body_block %}
+  <div class="col-md-12">
+    <div class ="row">
+      <div class="portlet portlet-default">
+        <div class="portlet-header">
+          <h4 class="portlet-title">
+            Keep shipments
+          </h4>
+        </div> <!-- /.portlet-header --> 
+        <div class="portlet-body">
+          {% if platinum %}
+            <h4> Your subscription plan is Platinum that has unlimited shipments per month, therefore you do not need the 'keep the shipment' package</h4>
+          {% endif %}
+          {% if gold or silver %}
+            {% if subscription.saver %}
+                <h4>You already bought the package. If you don't need it, you can unsubscribe from using this package.</h4>
+                <button type="submit" class="btn btn-outline-inversed btn-lg" id="about-btn">Do not keep my shipments</button>
+            {% else %}
+                <h4>Your shipments will get renewed on {{ renew_date }}. All the unused shipments will get burnt. To keep this shipments, you can get this package for as low as {% if silver %}€1.49{% else %}€1.89{% endif %}</h4>
+                <button type="submit" class="btn btn-outline-inversed btn-lg" id="about-btn">Buy package</button>
+            {% endif %}
+          {% endif %}
+          
+
+        </div> <!-- /.portlet-body -->
+      </div> <!-- /.portlet -->
+    </div> <!-- /.col -->
+  </div>
+
+<br><br>
+
+
+<!-- Javascript -->
+<script src="{% static 'login/js/jquery-1.11.1.min.js' %}"></script>
+<script src="{% static 'login/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'login/js/jquery.backstretch.js' %}"></script>
+<script src="{% static 'login/js/scripts.js' %}"></script>
+<script src="{% static 'app/js/package.js' %}"></script>
+{% endblock %}
+

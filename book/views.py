@@ -79,12 +79,85 @@ def account(request):
 	context_dict['subscription'] = subscription
 	if subscription.level.name == "Platinum":
 		context_dict['platinum'] = True
+	elif subscription.level.name == "Gold":
+		context_dict['gold'] = True
+	elif subscription.level.name == "Silver":
+		context_dict['silver'] = True
 	context_dict['all_shipments'] = subscription.available_shipments + subscription.extra_shipments
 	date = subscription.renew_date + relativedelta(months=1)
 	context_dict['renew_date'] = date.strftime('%d/%m/%Y')
 	addresses = Address.objects.filter(subscription = subscription)
 	context_dict['addresses'] = addresses
 	return render(request, 'app/account.html', context_dict)
+
+def add_addressee(request):
+	context_dict = {}
+	subscription = Subscription.objects.get(user = request.user)
+	context_dict['subscription'] = subscription
+	if subscription.level.name == "Platinum":
+		context_dict['platinum'] = True
+		if request.method == 'POST':
+			subscription.first_addressee_name = request.POST.get('firstname')
+			subscription.first_addressee_phone = request.POST.get('firstphone')
+			subscription.second_addressee_name = request.POST.get('secondname')
+			subscription.second_addressee_phone = request.POST.get('secondphone')
+			subscription.save()
+	elif subscription.level.name == "Gold":
+		context_dict['gold'] = True
+		if request.method == 'POST':
+			subscription.first_addressee_name = request.POST.get('firstname')
+			subscription.first_addressee_phone = request.POST.get('firstphone')
+			subscription.save()
+	elif subscription.level.name == "Silver":
+		context_dict['silver'] = True
+	context_dict['all_shipments'] = subscription.available_shipments + subscription.extra_shipments
+	date = subscription.renew_date + relativedelta(months=1)
+	context_dict['renew_date'] = date.strftime('%d/%m/%Y')
+	addresses = Address.objects.filter(subscription = subscription)
+	context_dict['addresses'] = addresses
+	return render(request, 'app/add_addressee.html', context_dict)
+
+def keep_shipments(request):
+	context_dict = {}
+	subscription = Subscription.objects.get(user = request.user)
+	context_dict['subscription'] = subscription
+	if subscription.level.name == "Platinum":
+		context_dict['platinum'] = True
+	elif subscription.level.name == "Gold":
+		context_dict['gold'] = True
+	elif subscription.level.name == "Silver":
+		context_dict['silver'] = True
+	date = subscription.renew_date + relativedelta(months=1)
+	context_dict['renew_date'] = date.strftime('%d/%m/%Y')
+	return render(request, 'app/keep_shipments.html', context_dict)
+
+def edit_details(request):
+	context_dict = {}
+	user_profile = UserProfile.objects.get(user= request.user)
+	context_dict['user_profile'] = user_profile
+	user = request.user
+	if request.method == 'POST':
+		user.first_name = request.POST.get('firstname')
+		user.last_name = request.POST.get('lastname')
+		user.email = request.POST.get('email')
+		user_profile.phone = request.POST.get('phone')
+		user.save()
+		user_profile.save()
+	return render(request, 'app/edit_details.html', context_dict)
+
+def change_password(request):
+	context_dict = {}
+	user = request.user
+	if request.method == 'POST':
+		password = request.POST.get('password')
+		confirm = request.POST.get('confirm')
+		if password == confirm and password:
+			set_password(password)
+			user.save()
+			context_dict['message'] = "password updated"
+		else:
+			context_dict['message'] = "passwords do not match or empty"
+	return render(request, 'app/edit_details.html', context_dict)
 
 def add_address(request):
 	context_dict = {}
@@ -112,18 +185,20 @@ def change_plan(request):
 		subscription =Subscription.objects.get(user = request.user)
 		subscription.level = subscription_type
 		subscription.available_shipments = subscription_type.amount_of_shipments
-		subscription.renew_date = datetime.now() + relativedelta(months=1)
+		subscription.renew_date = datetime.now()# + relativedelta(months=1)
 		if selected_plan == "Gold":
 			subscription.first_addressee_name = request.POST.get('firstname')
 			subscription.first_addressee_phone = request.POST.get('firstphone')
-			subscription.saver = request.POST.get('saver')
 		elif selected_plan == "Platinum":
 			subscription.first_addressee_name = request.POST.get('firstname')
 			subscription.first_addressee_phone = request.POST.get('firstphone')
 			subscription.second_addressee_name = request.POST.get('secondname')
 			subscription.second_addressee_phone = request.POST.get('secondphone')
-		elif selected_plan == "Silver":
-			subscription.saver = request.POST.get('saver')
+		saver = request.POST.get('saver')
+		if saver:
+			subscription.saver = True
+		else:
+			subscription.saver= False
 		subscription.save()
 		context_dict['subscription'] = subscription
 		return HttpResponseRedirect('/account')
