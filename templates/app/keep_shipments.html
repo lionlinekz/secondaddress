@@ -53,7 +53,8 @@
             <h4> Your subscription plan is Platinum that has unlimited shipments per month, therefore you do not need the 'keep the shipment' package</h4>
           {% endif %}
           {% if gold or silver %}
-            <form class="form-inline">
+            <form class="form-inline" action="/buy_shipments/" method="post">
+            {% csrf_token %}
               <div class="form-group">
                 <select class="form-control" name="number" id="shipment_number">
                   <option>1</option>

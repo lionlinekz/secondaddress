@@ -75,6 +75,12 @@ def subscribe(request):
 
 def account(request):
 	context_dict = {}
+    try:
+        shopkeeper = Shopkeeper.objects.get(user = request.user)
+        if shopkeeper:
+            return HttpResponseRedirect('/shopkeeper')
+    except:
+        print "no shopkeeper"
 	subscription = Subscription.objects.get(user = request.user)
 	context_dict['subscription'] = subscription
 	if subscription.level.name == "Platinum":
@@ -89,6 +95,10 @@ def account(request):
 	addresses = Address.objects.filter(subscription = subscription)
 	context_dict['addresses'] = addresses
 	return render(request, 'app/account.html', context_dict)
+
+def shopkeeper(request):
+    context_dict = {}
+    
 
 def add_addressee(request):
 	context_dict = {}
@@ -253,6 +263,15 @@ def pay(request):
     		subscription = Subscription(user = request.user, available_shipments = 0, extra_shipments = 1, level = level)
     		subscription.save()
 	return render(request, 'book/confirmation.html', context_dict)
+
+def buy_shipments(request):
+    context_dict = {}
+    if request.method == 'POST':
+        subscription = Subscription.objects.get(user = request.user)
+        subscription.extra_shipments += int(request.POST.get('number'))
+        subscription.save()
+    return HttpResponseRedirect('/account')
+
 
 def register(request):
 
