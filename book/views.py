@@ -75,12 +75,12 @@ def subscribe(request):
 
 def account(request):
 	context_dict = {}
-    try:
-        shopkeeper = Shopkeeper.objects.get(user = request.user)
-        if shopkeeper:
-            return HttpResponseRedirect('/shopkeeper')
-    except:
-        print "no shopkeeper"
+	try:
+		shopkeeper = Shopkeeper.objects.get(user = request.user)
+		if shopkeeper:
+			return HttpResponseRedirect('/shopkeeper')
+	except:
+		print "no shopkeeper"
 	subscription = Subscription.objects.get(user = request.user)
 	context_dict['subscription'] = subscription
 	if subscription.level.name == "Platinum":
@@ -98,6 +98,7 @@ def account(request):
 
 def shopkeeper(request):
     context_dict = {}
+    return render(request, 'book/subscribe_pay.html', context_dict)
     
 
 def add_addressee(request):
