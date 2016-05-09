@@ -54,7 +54,6 @@ class Day(models.Model):
 	def __unicode__(self):
 		return str(self.opening)
 
-
 class Shopkeeper(models.Model):
 	user = models.OneToOneField(User)
 	tax_code = models.CharField(max_length=128)

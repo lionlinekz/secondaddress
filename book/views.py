@@ -98,7 +98,10 @@ def account(request):
 
 def shopkeeper(request):
     context_dict = {}
-    return render(request, 'book/subscribe_pay.html', context_dict)
+    shopkeeper = Shopkeeper.objects.get(user = request.user)
+    addresses = Address.objects.filter(shopkeeper = shopkeeper)
+    context_dict["addresses"] = addresses
+    return render(request, 'shopkeeper/subscribers.html', context_dict)
     
 
 def add_addressee(request):
