@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from book.models import Subscription, SubscriptionType, PersonEmpowered, UserProfile, Address, Shopkeeper
+from book.models import Subscription, SubscriptionType, PersonEmpowered, UserProfile, Address, Shopkeeper, Parcel
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
@@ -101,7 +101,32 @@ def shopkeeper(request):
     shopkeeper = Shopkeeper.objects.get(user = request.user)
     addresses = Address.objects.filter(shopkeeper = shopkeeper)
     context_dict["addresses"] = addresses
+    context_dict["parcels"] = Parcel.objects.filter(status = False)
     return render(request, 'shopkeeper/subscribers.html', context_dict)
+
+def parcels(request):
+	context_dict = {}
+	if request.method == 'POST':
+		address_id = request.POST.get('user')
+		address = Address.objects.get(id = int(address_id))
+		name = request.POST.get('name')
+		parcel = Parcel(address = address, name = name)
+		parcel.save()
+	return HttpResponseRedirect('/shopkeeper')
+
+def take_parcel(request):
+	context_dict = {}
+	if request.method == 'POST':
+		parcel_id = request.POST.get('parcel')
+		parcel = Parcel.objects.get(id = int(parcel_id))
+		parcel.status = True
+		parcel.save()
+	return HttpResponseRedirect('/shopkeeper')
+
+def parcels_taken(request):
+	context_dict = {}
+	context_dict["parcels"] = Parcel.objects.filter(status = True)
+	return render(request, 'shopkeeper/parcels_taken.html', context_dict)
     
 
 def add_addressee(request):

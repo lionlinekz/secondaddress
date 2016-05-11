@@ -5,13 +5,12 @@
 {% block menu_block %}
 <!-- .dropdown -->
 <li class="chosen_item"><a href="/shopkeeper/">Clients</a></li>
-<li><a href="/parcels_on_hold/">Parcels on hold</a></li>
 <li><a href="/parcels_taken/">Parcels taken</a></li>
 <!-- /.dropdown -->
 {% endblock %}
 {% block body_block %}
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-5">
     <div class="portlet portlet-default">
       <div class="portlet-header">
         <h4 class="portlet-title">
@@ -20,42 +19,68 @@
       </div> <!-- /.portlet-header --> 
       <div class="portlet-body">
         {% for address in addresses %}
-          <p> <a class="btn btn-outline-inversed btn-xs pull-right" href="/notify">notify </a> {{ address.subscription.user.first_name }}  {{ address.subscription.user.last_name }}
-          </p>
-          {% if address.subscription.first_addressee_name %}
-            <p> <a class="btn btn-outline-inversed btn-xs pull-right" href="/notify">notify </a> {{ address.subscription.first_addressee_name }} </p>
-          {% endif %}
-          {% if address.subscription.second_addressee_name %}
-            <p> <a class="btn btn-outline-inversed btn-xs pull-right" href="/notify">notify </a> {{ address.subscription.second_addressee_name }} </p>
-          {% endif %}
-        {% endfor %}
-      </div> <!-- /.portlet-body -->
-    </div> <!-- /.portlet -->
-  </div> <!-- /.col -->
-  <div class="col-md-8">
-    <div class="portlet portlet-default">
-      <div class="portlet-header">
-        <h4 class="portlet-title">
-          Your clients
-        </h4>
-      </div> <!-- /.portlet-header --> 
-      <div class="portlet-body">
-        {% for address in addresses %}
-          <p> {{ address.subscription.user.first_name }}  {{ address.subscription.user.last_name }}
-          <div class="col-lg-3 pull-right">
-          <a class="btn btn-outline-inversed btn-xs" href="/register">Get your second address</a>
-          </div>
-          </p>
-          {% if address.subscription.first_addressee_name %}
-            <p> {{ address.subscription.first_addressee_name }} </p>
-          {% endif %}
-          {% if address.subscription.second_addressee_name %}
-            <p> {{ address.subscription.second_addressee_name }} </p>
-          {% endif %}
-        {% endfor %}
-      </div> <!-- /.portlet-body -->
-    </div> <!-- /.portlet -->
-  </div> <!-- /.col -->
+        <p> <div class="col-lg-3 pull-right">
+          <form action="/parcels/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="user" value="{{ address.id }}">
+            <input type="hidden" name="name" value="{{ address.subscription.user.first_name }}  {{ address.subscription.user.last_name }}">
+            <button class="btn btn-outline-inversed btn-xs" type="submit">notify new parcel</button>
+          </form>
+        </div>
+        {{ address.subscription.user.first_name }}  {{ address.subscription.user.last_name }}
+      </p>
+      {% if address.subscription.first_addressee_name %}
+      <p> <div class="col-lg-3 pull-right">
+        <form action="/parcels/" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="user" value="{{ address.id }}">
+          <input type="hidden" name="name" value="{{ address.subscription.first_addressee_name }}">
+          <button class="btn btn-outline-inversed btn-xs" type="submit">notify new parcel</button>
+        </form>
+      </div>
+      {{ address.subscription.first_addressee_name }}
+    </p>
+      {% endif %}
+      {% if address.subscription.second_addressee_name %}
+      <p> 
+        <div class="col-lg-3 pull-right">
+          <form action="/parcels/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="user" value="{{ address.id }}">
+            <input type="hidden" name="name" value="{{ address.subscription.second_addressee_name }}">
+            <button class="btn btn-outline-inversed btn-xs"  type="submit">notify new parcel</button>
+          </form>
+        </div>
+        {{ address.subscription.second_addressee_name }}
+      </p>
+      {% endif %}
+      {% endfor %}
+    </div> <!-- /.portlet-body -->
+  </div> <!-- /.portlet -->
+</div> <!-- /.col -->
+<div class="col-md-7">
+  <div class="portlet portlet-default">
+    <div class="portlet-header">
+      <h4 class="portlet-title">
+        Parcels on hold
+      </h4>
+    </div> <!-- /.portlet-header --> 
+    <div class="portlet-body">
+      {% for parcel in parcels %}
+            <div class="col-lg-3 pull-right">
+        <form action="/take_parcel/" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="parcel" value="{{ parcel.id }}">
+          <button class="btn btn-outline-inversed btn-xs" type="submit">take parcel</button>
+        </form>
+      </div>
+      <p> {{ parcel }}
+
+      </p>
+      {% endfor %}
+    </div> <!-- /.portlet-body -->
+  </div> <!-- /.portlet -->
+</div> <!-- /.col -->
 </div> <!-- /.container -->
 <br><br>
 <!-- Javascript -->

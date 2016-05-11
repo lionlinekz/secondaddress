@@ -1,0 +1,55 @@
+{% extends 'app/account.html' %}
+
+{% load staticfiles %}
+
+{% block menu_block %}
+<!-- .dropdown -->
+<li><a href="/shopkeeper/">Clients</a></li>
+<li class="chosen_item"><a href="/parcels_taken/">Parcels taken</a></li>
+<!-- /.dropdown -->
+{% endblock %}
+{% block body_block %}
+<div class="row">
+<div class="col-md-12">
+  <div class="portlet portlet-default">
+    <div class="portlet-header">
+      <h4 class="portlet-title">
+        Parcels taken
+      </h4>
+    </div> <!-- /.portlet-header --> 
+    <div class="portlet-body">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td>Date received</td>
+          <td>Date handled</td>
+        </tr>
+        {% for parcel in parcels %}
+        <tr>
+          <td> {{ parcel }}</td>
+          <td>{{ parcel.date }}</td>
+          <td>@fat</td>
+        </tr>
+             
+        <p>
+
+        </p>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    </div> <!-- /.portlet-body -->
+  </div> <!-- /.portlet -->
+</div> <!-- /.col -->
+</div> <!-- /.container -->
+<br><br>
+<!-- Javascript -->
+<script src="{% static 'login/js/jquery-1.11.1.min.js' %}"></script>
+<script src="{% static 'login/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'login/js/jquery.backstretch.js' %}"></script>
+<script src="{% static 'login/js/scripts.js' %}"></script>
+<script src="{% static 'app/js/package.js' %}"></script>
+{% endblock %}
+

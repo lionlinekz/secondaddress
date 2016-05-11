@@ -82,3 +82,12 @@ class Address(models.Model):
 
 	def __unicode__(self):
 		return self.shopkeeper.shop_name
+
+class Parcel(models.Model):
+	address = models.ForeignKey(Address)
+	date = models.DateTimeField(default=datetime.now())
+	status = models.BooleanField(default = False)
+	name = models.CharField(max_length=128, default="")
+
+	def __unicode__(self):
+		return self.name
